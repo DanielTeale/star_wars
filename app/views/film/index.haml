@@ -1,0 +1,47 @@
+.title
+  %h1 Star Wars Movie List
+
+.content
+  .search-field
+    %label Search
+    = text_field_tag :search
+  %table.movie-list
+    %thead
+      %tr
+        %th Title
+        %th Favourite
+    %tbody
+      - @films.each do |film|
+        %tr
+          %td.title
+            = link_to film.title, film_path(film.id)
+          %td
+            %a.favourite{href: '#'} favourite?
+
+
+-#:javascript
+-#  const searchField = document.querySelector('input[type=text]')
+-#  const table = document.querySelector('table')
+-#
+-#  searchField.addEventListener('keydown', (e) => {
+-#    for (let i = 1; i < table.rows.length; i++) {
+-#      row = table.rows[i]
+-#      if (row.innerText.includes(e.target.value)) {
+-#        row.style.display = ''
+-#      } else {
+-#        row.style.display = 'none'
+-#      }
+-#    }
+-#  })
+-#
+-#  document.querySelectorAll('.favourite').forEach((favourite, i) => {
+-#    favourite.addEventListener('click', (event) => {
+-#      event.preventDefault();
+-#      const row = table.rows[i];
+-#      const table_body = document.querySelector('tbody');
+-#      console.log(table_body);
+-#      table_body.insertBefore(row, table_body.children[0]);
+-#
+-#      row.children[1].childNodes[1].textContent = 'unfavourite?';
+-#    })
+  })

@@ -1,0 +1,23 @@
+:ruby
+  models = %w[characters planets starships vehicles species]
+
+.title
+  %h3.film-title= @film.title
+.content
+  - @film.attributes.each do |key|
+    - next if %i[title id updated_at created_at].include? key[0].to_sym
+
+    .label
+      %b= key[0].capitalize
+    .value
+      = key[1]
+    %br
+
+  - models.each do |model|
+    .label
+      %b= model.capitalize
+    - film_model = @film.send("#{model}")
+    - film_model.each do |key|
+      %div
+        = key[:name]
+    %br
